@@ -24,10 +24,9 @@ export default class ProductVariant {
     readonly stock: number,
     readonly priceInCent: number,
     readonly option: OptionType,
-    readonly onSale: onSaleType,  
     readonly techDetails: techDetailsType[],
-    readonly createdAt: Date
-  
+    readonly onSale?: onSaleType, 
+    readonly createdAt?: Date,
   ) {}
 
   static create(
@@ -38,9 +37,9 @@ export default class ProductVariant {
     stock: number,
     priceInCent: number,
     option: OptionType,
-    onSale: onSaleType,  
     techDetails: techDetailsType[],
-    createdAt: Date
+    onSale?: onSaleType,  
+    createdAt?: Date
 ) {
     return new ProductVariant(
         id,
@@ -50,8 +49,8 @@ export default class ProductVariant {
         stock,
         priceInCent,
         option ,
-        onSale,  
         techDetails,
+        onSale,  
         createdAt
     );
   }

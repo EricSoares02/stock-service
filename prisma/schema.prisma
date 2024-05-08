@@ -35,7 +35,7 @@ pictures String[]
 stock Int @default(0)
 priceInCent Int
 option Json
-onSale Json  
+onSale Json?  
 techDetails Json[]
 createdAt DateTime @default(now())
 
