@@ -56,19 +56,19 @@ export default class ProductVariant {
     );
   }
 
-  get() {
+  // static get() {
 
-    return {
-        id: this.id,
-        idMainProduct: this.productMainId,
-        isActive: this.isActive,
-        pictures: this.pictures,
-        stock: this.stock,
-        priceInCent: this.priceInCent,
-        option: this.option ,
-        onSale: this.onSale,  
-        techDetails: this.techDetails,
-        createdAt: this.createdAt
-    }
-  }
+  //   return {
+  //       id: this.id,
+  //       idMainProduct: this.productMainId,
+  //       isActive: this.isActive,
+  //       pictures: this.pictures,
+  //       stock: this.stock,
+  //       priceInCent: this.priceInCent,
+  //       option: this.option ,
+  //       onSale: this.onSale,  
+  //       techDetails: this.techDetails,
+  //       createdAt: this.createdAt
+  //   }
+  // }
 }

@@ -11,7 +11,7 @@ export default class DatabaseManager{
     }
 
     excecuteConnection(){
-
+    
         return this.databaseOrm.$connect()
 
     }
@@ -23,10 +23,19 @@ export default class DatabaseManager{
     }
 
 
-    database(){
+    tables(){
 
+        const tables = {
+            products: this.databaseOrm.products,
+            variants: this.databaseOrm.productVariant
+        }
+        
+        return tables
+
+    }
+
+    orm(){
         return this.databaseOrm
-
     }
 
 }

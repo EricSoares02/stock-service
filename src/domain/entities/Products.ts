@@ -1,6 +1,6 @@
 import ProductVariant from "./Variants";
 
-export default class DefaultProduct {
+export default class Product {
   private constructor(
     readonly id: string,
     readonly name: string,
@@ -26,7 +26,7 @@ export default class DefaultProduct {
     variants: ProductVariant[],
     createdAt: Date
   ) {
-    return new DefaultProduct(
+    return new Product(
       id,
       name,
       description,
@@ -37,5 +37,4 @@ export default class DefaultProduct {
     );
   }
 
-  use() {}
 }
