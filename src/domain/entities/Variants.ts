@@ -5,20 +5,20 @@
 
   type onSaleType =  {
     //promoção
-     active: boolean;
-     percentage: number;
+    active: boolean;
+    percentage: number;
   }
 
   type techDetailsType = {
     //detalhes tecnicos
-    readonly title: string;
-    readonly text: string;
+    title: string;
+    text: string;
   }
 
 export default class ProductVariant {
   private constructor(
     readonly id: string, 
-    readonly idMainProduct: string,
+    readonly productMainId: string,
     readonly isActive: boolean,
     readonly pictures: string[],
     readonly stock: number,
@@ -32,7 +32,7 @@ export default class ProductVariant {
 
   static create(
     id: string,
-    idMainProduct: string,
+    productMainId: string,
     isActive: boolean,
     pictures: string[],
     stock: number,
@@ -44,7 +44,7 @@ export default class ProductVariant {
 ) {
     return new ProductVariant(
         id,
-        idMainProduct,
+        productMainId,
         isActive,
         pictures,
         stock,
@@ -60,7 +60,7 @@ export default class ProductVariant {
 
     return {
         id: this.id,
-        idMainProduct: this.idMainProduct,
+        idMainProduct: this.productMainId,
         isActive: this.isActive,
         pictures: this.pictures,
         stock: this.stock,

@@ -16,8 +16,27 @@ datasource db {
 model Products {
 
 id String @id @default(auto()) @map("_id") @db.ObjectId
-
-
+name String 
+description String
+category String
+subCategory String
+variants ProductVariant[]
+createdAt DateTime
 
 }
 
+model ProductVariant {
+
+id String @id @default(auto()) @map("_id") @db.ObjectId
+productMainId String @db.ObjectId
+mainProduct Products @relation(fields: [productMainId], references: [id])
+isActive Boolean @default(false)
+pictures String[]
+stock Int @default(0)
+priceInCent Int
+option Json
+onSale Json  
+techDetails Json[]
+createdAt DateTime @default(now())
+
+}
