@@ -21,12 +21,12 @@ description String
 category String
 subCategory String
 UPC Int
-variants ProductVariant[]
+variants Variants[]
 createdAt DateTime @default(now())
 
 }
 
-model ProductVariant {
+model Variants {
 
 id String @id @default(auto()) @map("_id") @db.ObjectId
 productMainId String @db.ObjectId
