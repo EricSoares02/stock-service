@@ -27,7 +27,7 @@ export default class DatabaseManager{
 
         const tables = {
             products: this.databaseOrm.products,
-            variants: this.databaseOrm.productVariant
+            variants: this.databaseOrm.variants
         }
         
         return tables
