@@ -1,6 +1,7 @@
 
 import { Prisma } from '@prisma/client';
 import ProductVariant from './../../domain/entities/Variants';
+import { ReturnCreateVariantType } from '../../domain/types/variant';
 
 
 export interface IVariant {
@@ -19,7 +20,7 @@ export interface IVariant {
 export interface IVariantRepository{
 
 
-    add(data: ProductVariant): Promise<void>
+    add(data: ProductVariant): Promise<ReturnCreateVariantType>
 
     update(data: ProductVariant): Promise<void>
 

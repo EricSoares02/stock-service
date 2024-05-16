@@ -3,7 +3,7 @@
 import ValidationData from "./validation";
 
 
-export default class ProductValidation{
+export default class VariantValidation{
 
 
     async execute(data: any, schema:any){

@@ -10,19 +10,23 @@ const onSale = z.object({
     percentage: z.number()
 }).optional();
 
-const techDetails = z.object({
+const techDetails = z.array(z.object({
     title: z.string(),
     text: z.string()
-}).array();
+}));
 
 export const VariantSchema = z.object({
-    productMainId: z.string().length(24),
+    
     isActive: z.boolean(),
-    pictures: z.string().url().array(),
+    pictures: z.array(z.string().url()),
     stock: z.number().nonnegative(),
     priceInCent: z.number().nonnegative(),
+    priceCurrency: z.string().length(3),
+    SKU: z.string().min(3),
     option: option,
     onSale: onSale,
     techDetails: techDetails,
     createdAt: z.date().optional()
 });
+
+export const VariantArraySchema = z.array(VariantSchema)

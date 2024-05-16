@@ -1,27 +1,32 @@
- type OptionType = {
+ export type OptionType = {
     title: string,
     value: string
   }
 
-  type onSaleType =  {
+  export type onSaleType =  {
     //promoção
     active: boolean;
     percentage: number;
   }
 
-  type techDetailsType = {
+ export type techDetailsType = {
     //detalhes tecnicos
     title: string;
     text: string;
   }
-
-export default class ProductVariant {
+  
+      
+     
+    
+export default class Variant {
   private constructor(
     readonly id: string, 
     readonly productMainId: string,
     readonly isActive: boolean,
     readonly pictures: string[],
     readonly stock: number,
+    readonly priceCurrency: string,
+    readonly SKU: string,
     readonly priceInCent: number,
     readonly option: OptionType,
     readonly techDetails: techDetailsType[],
@@ -35,18 +40,22 @@ export default class ProductVariant {
     isActive: boolean,
     pictures: string[],
     stock: number,
+    priceCurrency: string,
+    SKU: string,
     priceInCent: number,
     option: OptionType,
     techDetails: techDetailsType[],
     onSale?: onSaleType,  
     createdAt?: Date
 ) {
-    return new ProductVariant(
+    return new Variant(
         id,
         productMainId,
         isActive,
         pictures,
         stock,
+        priceCurrency,
+        SKU,
         priceInCent,
         option ,
         techDetails,

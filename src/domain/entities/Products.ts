@@ -7,14 +7,10 @@ export default class Product {
     readonly description: string,
     readonly category: string,
     readonly subCategory: string,
+    readonly UPC: number,
     readonly variants: ProductVariant[],
     readonly createdAt: Date
-  ) // readonly Options: [
-  //   {
-  //     name: string,
-  //     option: string[]
-  //   }
-  // ],
+  )
   {}
 
   static create(
@@ -23,6 +19,7 @@ export default class Product {
     description: string,
     category: string,
     subCategory: string,
+    UPC: number,
     variants: ProductVariant[],
     createdAt: Date
   ) {
@@ -32,6 +29,7 @@ export default class Product {
       description,
       category,
       subCategory,
+      UPC,
       variants,
       createdAt
     );

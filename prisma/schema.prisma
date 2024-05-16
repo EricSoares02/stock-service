@@ -20,8 +20,9 @@ name String
 description String
 category String
 subCategory String
+UPC Int
 variants ProductVariant[]
-createdAt DateTime
+createdAt DateTime @default(now())
 
 }
 
@@ -33,10 +34,12 @@ mainProduct Products @relation(fields: [productMainId], references: [id])
 isActive Boolean @default(false)
 pictures String[]
 stock Int @default(0)
+priceCurrency String @default("BRL")
+SKU String @unique
 priceInCent Int
 option Json
 onSale Json?  
 techDetails Json[]
-createdAt DateTime @default(now())
-
+createdAt DateTime @default(now()) 
+    
 }
