@@ -22,7 +22,7 @@ export interface IVariantRepository{
 
     add(data: ProductVariant): Promise<ReturnCreateVariantType>
 
-    update(data: ProductVariant): Promise<void>
+    update(data: ProductVariant): Promise<IVariant>
 
     get(productVariantId: string): Promise<IVariant | null>
 

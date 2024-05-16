@@ -4,45 +4,7 @@ import axios from "axios";
 describe('testing routes cycle', ()=>{
 
 
-  const url = `${process.env.URL_FOR_TEST}${process.env.PORT}` 
-
-  const variant = {
-    id: "stwtew",
-    //productMainId: "gwa",
-    isActive: false,
-    pictures: ["daeorfaop"],
-    stock: 22,
-    priceInCent: 2341,
-    priceCurrency: "BRL",
-    SKU: "J234K432", //Stock Keeping Unit (Unidade de Manutenção de Estoque),
-    option: {
-      title: "DASD",
-      value: "ofrajfa",
-    },
-    onSale: {
-      active: false,
-      percentage: 54,
-    },
-    techDetails: [
-      {
-        title: "das",
-        text: "fasf",
-      },
-    ],
-    //createdAt: Date(),
-  }
-
-  const product = {
-
-    id: "afra34131a",
-    name: "example",
-    description: "example",
-    category: "example",
-    subCategory: "example",
-    variants: variant,
-    //createdAt: Date(),
-    UPC: 123456789101, //Universal product code (codigo de barra)
-  }
+  const url =  'http://localhost:3001'
 
   let productSaved = {
     id: ''
@@ -51,31 +13,151 @@ describe('testing routes cycle', ()=>{
 
   describe("test the post products routes", () => {
 
-    it('should return error when trying save a product with wrong data', async ()=>{
 
-      const {name: name, ...prod} = product
+
+    
+    test('should save product', async ()=>{
   
-      const response = await axios.post(`${url}/save`, prod);
-  
-        expect(response.status).toBe(400);
-        expect(typeof response.data).toBe("string");
-  
-    })
-  
-  
-    it('should save product', async ()=>{
-  
-      const response = await axios.post(`${url}/save`, product);
-  
+      const response = await axios.post(`${url}/save`, {
+      "name": "example",
+      "description": "aidwioeqas",
+      "category": "example",
+      "subCategory": "example",
+      "UPC": 123456789101,
+      "variants":[
+        {
+          "isActive": true,
+          "pictures": [
+            "https://en.wikipedia.org/wiki/ISO_4217"
+          ],
+          "stock": 22,
+            "priceInCent": 2341,
+          "priceCurrency": "BRL",
+          "SKU": "FSAS",
+          "option": {
+            "title": "ds",
+            "value": "dse"
+          },
+          "onSale": {
+            "active": false,
+            "percentage": 32
+          },
+          "techDetails": [
+            {
+              "title": "xample",
+              "text": "xample"
+            },
+            {
+              "title": "xample",
+              "text": "xample"
+            }
+          ]
+        }
+      ] 
+    }
+      );
+
         expect(response.status).toBe(201);
-        expect(response.data).toBe("Successful");
-        productSaved = response.data
+        expect(response.data.message).toBe("Successful");
+        productSaved = response.data.data
+  })
+
+
+
+    test('should return error when trying save a product with wrong data', async ()=>{
+
+        const response = await axios.post(`${url}/save`,
+        {
+          "name": 123,
+          "description": "aidwioeqas",
+          "category": "example",
+          "subCategory": "example",
+          "UPC": 123456789101,
+          "variants":[
+            {
+              "isActive": true,
+              "pictures": [
+                "https://en.wikipedia.org/wiki/ISO_4217"
+              ],
+              "stock": 22,
+                "priceInCent": 2341,
+              "priceCurrency": "BRL",
+              "SKU": "FSAS",
+              "option": {
+                "title": "ds",
+                "value": "dse"
+              },
+              "onSale": {
+                "active": false,
+                "percentage": 32
+              },
+              "techDetails": [
+                {
+                  "title": "xample",
+                  "text": "xample"
+                },
+                {
+                  "title": "xample",
+                  "text": "xample"
+                }
+              ]
+            }
+          ] 
+        
+          
+      }
+      )
+      
+    
+        expect(response.status).toBe(400);
+        expect(typeof response.data.message).toBe("string");
+  
     })
   
-  
-    it('should not save a repeat product', async ()=>{
+
+
+    test('should not save a repeat product', async ()=>{
       
-      const response = await axios.post(`${url}/save`, product);
+      const response = await axios.post(`${url}/save`, {
+        "name": "example",
+        "description": "aidwioeqas",
+        "category": "example",
+        "subCategory": "example",
+        "UPC": 123456789101,
+        "variants":[
+          {
+            "isActive": true,
+            "pictures": [
+              "https://en.wikipedia.org/wiki/ISO_4217"
+            ],
+            "stock": 22,
+              "priceInCent": 2341,
+            "priceCurrency": "BRL",
+            "SKU": "FSAS",
+            "option": {
+              "title": "ds",
+              "value": "dse"
+            },
+            "onSale": {
+              "active": false,
+              "percentage": 32
+            },
+            "techDetails": [
+              {
+                "title": "xample",
+                "text": "xample"
+              },
+              {
+                "title": "xample",
+                "text": "xample"
+              }
+            ]
+          }
+        ] 
+      
+        
+    }
+    );
   
         expect(response.status).toBe(400);
         expect(typeof response.data).toBe("string");

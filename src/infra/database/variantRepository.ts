@@ -1,5 +1,5 @@
 import { IVariant, IVariantRepository } from "../../appllication/repositories/VariantRepository";
-import ProductVariant from "../../domain/entities/Variants";
+import Variant from "../../domain/entities/Variants";
 import { ReturnCreateVariantType } from "../../domain/types/variant";
 import DatabaseManager from "./database";
 
@@ -8,7 +8,7 @@ import DatabaseManager from "./database";
 export default class VariantRepository implements IVariantRepository{
 
 
-    async add(data: ProductVariant): Promise<ReturnCreateVariantType> {
+    async add(data: Variant): Promise<ReturnCreateVariantType> {
         const db = new DatabaseManager();
         db.excecuteConnection();
         return await db.tables().variants.create({data}).finally(()=>db.executeDisconnection());
@@ -16,10 +16,10 @@ export default class VariantRepository implements IVariantRepository{
     }
 
 
-    async update(data: ProductVariant): Promise<void> {
+    async update(data: any): Promise<IVariant> {
         const db = new DatabaseManager();
         db.excecuteConnection();
-        await db.tables().variants.update({
+        return await db.tables().variants.update({
             where:{
                 id: data.id,
             },
@@ -43,7 +43,7 @@ export default class VariantRepository implements IVariantRepository{
     }
 
 
-    async addMany(data: Array<ProductVariant>){
+    async addMany(data: Array<Variant>){
         const db = new DatabaseManager();
         db.excecuteConnection();
         return await db.tables().variants.createMany({data}).finally(()=>db.executeDisconnection());
