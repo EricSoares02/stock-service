@@ -139,6 +139,15 @@ Here you can list the main routes of your API, and what are their expected reque
 }
 ```
 
+or
+
+**RESPONSE**
+```json
+{
+  "status": "unsuccessful",
+  "message": "Validation error"
+}
+```
 
 <h3 id="get-detail">GET /product</h3>
 
@@ -179,17 +188,145 @@ Here you can list the main routes of your API, and what are their expected reque
                 "text": "xample"
               }
             ]
+          },
+          {
+            "isActive": true,
+            "pictures": [
+              "https://en.wikipedia.org/wiki/ISO_4217",
+              "https://en.wikipedia.org/wiki/ISO_4217"
+            ],
+            "stock": 22,
+            "priceInCent": 2341,
+            "priceCurrency": "BRL",
+            "SKU": "FSAS",
+            "option": {
+              "title": "ds",
+              "value": "dse"
+            },
+            "onSale": {
+              "active": false,
+              "percentage": 32
+            },
+            "techDetails": [
+              {
+                "title": "xample",
+                "text": "xample"
+              },
+              {
+                "title": "xample",
+                "text": "xample"
+              }
+            ]
           }
         ]   
     }
 ```
 
 
+
 <h3 id="get-search-detail">GET /search</h3>
 
 **RESPONSE**
-```json
+```json 
 {
+  [
+    {
+        "name": "example",
+        "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+        "category": "category",
+        "subCategory": "subCategory",
+        "UPC": 123456789101,
+        "variants":[
+          {
+            "isActive": true,
+            "pictures": [
+              "https://en.wikipedia.org/wiki/ISO_4217",
+              "https://en.wikipedia.org/wiki/ISO_4217"
+            ],
+            "stock": 22,
+            "priceInCent": 2341,
+            "priceCurrency": "BRL",
+            "SKU": "FSAS",
+            "option": {
+              "title": "ds",
+              "value": "dse"
+            },
+            "onSale": {
+              "active": false,
+              "percentage": 32
+            },
+            "techDetails": [
+              {
+                "title": "xample",
+                "text": "xample"
+              },
+              {
+                "title": "xample",
+                "text": "xample"
+              }
+            ]
+          },
+          {
+            "isActive": true,
+            "pictures": [
+              "https://en.wikipedia.org/wiki/ISO_4217",
+              "https://en.wikipedia.org/wiki/ISO_4217"
+            ],
+            "stock": 22,
+            "priceInCent": 2341,
+            "priceCurrency": "BRL",
+            "SKU": "FSAS",
+            "option": {
+              "title": "ds",
+              "value": "dse"
+            },
+            "onSale": {
+              "active": false,
+              "percentage": 32
+            },
+            "techDetails": [
+              {
+                "title": "xample",
+                "text": "xample"
+              },
+              {
+                "title": "xample",
+                "text": "xample"
+              }
+            ]
+          },
+          {
+            "isActive": true,
+            "pictures": [
+              "https://en.wikipedia.org/wiki/ISO_4217",
+              "https://en.wikipedia.org/wiki/ISO_4217"
+            ],
+            "stock": 22,
+            "priceInCent": 2341,
+            "priceCurrency": "BRL",
+            "SKU": "FSAS",
+            "option": {
+              "title": "ds",
+              "value": "dse"
+            },
+            "onSale": {
+              "active": false,
+              "percentage": 32
+            },
+            "techDetails": [
+              {
+                "title": "xample",
+                "text": "xample"
+              },
+              {
+                "title": "xample",
+                "text": "xample"
+              }
+            ]
+          }
+        ]   
+    },
+    {
         "name": "example",
         "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
         "category": "category",
@@ -285,6 +422,9 @@ Here you can list the main routes of your API, and what are their expected reque
           }
         ]   
     }
+  ]
+}
+
 ```
 
 
@@ -296,6 +436,24 @@ Here you can list the main routes of your API, and what are their expected reque
 {
   "uptype": "description",
   "value": "value here"
+}
+```
+
+
+**RESPONSE**
+```json
+{
+  "status": "successful"
+}
+```
+
+or
+
+**RESPONSE**
+```json
+{
+  "status": "unsuccessful",
+  "message": "Validation error"
 }
 ```
 
