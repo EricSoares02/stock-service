@@ -6,7 +6,7 @@
 [RABBITMQ_BADGE]:https://img.shields.io/badge/Rabbitmq-FF6600?style=for-the-badge&logo=rabbitmq&logoColor=white
 [ZOD_BADGE]:https://img.shields.io/badge/zod-%233068b7.svg?style=for-the-badge&logo=zod&logoColor=white
 
-<h1 align="center" style="font-weight: bold;">Project name 💻</h1>
+<h1 align="center" style="font-weight: bold;">Stock Service</h1>
 
 ![express][EXPRESS__BADGE]
 ![node][NODE_BADGE]
@@ -24,7 +24,7 @@
 </p>
 
 <p align="center">
-  <b>Simple description of what your project do or how to use it.</b>
+  <b>(Português) Este Projeto é um microservice responsável pelo gerenciamento do estoque de produtos. Por meio da aplicação, produtos podem ser cadastrado, mantidos e gerenciados. (English) This Project is a microservice responsible for managing product inventory. Through the application, products can be registered, maintained and managed.</b>
 </p>
 
 <h2 id="started">🚀 Getting started</h2>
