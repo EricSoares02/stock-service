@@ -145,7 +145,7 @@ or
 ```json
 {
   "status": "unsuccessful",
-  "message": "Validation error"
+  "message": "any type of error"
 }
 ```
 
@@ -154,6 +154,9 @@ or
 **RESPONSE**
 ```json
 {
+  
+  "status": "successful",
+  "product": {
         "name": "example",
         "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
         "category": "category",
@@ -218,18 +221,28 @@ or
               }
             ]
           }
-        ]   
+        ]  
+      } 
     }
 ```
 
+or
 
+```json 
+{
+  "status": "unsuccessful",
+  "message": "any type of error"
+}
+```
 
 <h3 id="get-search-detail">GET /search</h3>
 
 **RESPONSE**
 ```json 
 {
-  [
+  
+  "status": "unsuccessful",
+  "products": [
     {
         "name": "example",
         "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
@@ -427,6 +440,14 @@ or
 
 ```
 
+or
+
+```json 
+{
+  "status": "unsuccessful",
+  "message": "any type of error"
+}
+```
 
 
 <h3 id="put-detail">PUT /product</h3>
@@ -449,11 +470,10 @@ or
 
 or
 
-**RESPONSE**
-```json
+```json 
 {
   "status": "unsuccessful",
-  "message": "Validation error"
+  "message": "any type of error"
 }
 ```
 
