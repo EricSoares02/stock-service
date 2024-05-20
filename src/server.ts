@@ -4,7 +4,7 @@ import SaveProduct from './appllication/usecases/SaveProduct';
 import { HttpResponse, httpResponseStatus } from './infra/events/HttpResponse/http.response';
 import { defaultReturnStatus } from './infra/events/errors/defaultError';
 import cors from 'cors'
-import { ManagerProduct } from './appllication/usecases/ManageProduct';
+import { ManagerProduct, OperetionsType } from './appllication/usecases/ManageProduct';
 import { UpdateStock } from './appllication/usecases/ManagerStock';
 import VariantRepository from './infra/database/variantRepository';
 
@@ -33,16 +33,22 @@ app.post('/save', async function(req:Request, res:Response) {
 
 
 
-app.put('/update', async function(req:Request, res:Response) {
+app.put('/update?update', async function(req:Request, res:Response) {
     
+        
         type paramsType ={
-            id?: string,
-            uptype?: string
+            uptype: OperetionsType
         }
 
-        const {id, uptype} = req.params as paramsType
+        const httpRes = new HttpResponse(res)
+        const  {uptype} = req.params as paramsType
+        const {status, error} = await new ManagerProduct(productRepository).updateCamp(req.body, uptype)
 
-        const {} = await new ManagerProduct().updateCamp()
+        if(status === defaultReturnStatus.fail){
+            return httpRes.execute(httpResponseStatus['Bad Request'], error?.message ?? 'error')
+        }
+
+        return httpRes.execute(httpResponseStatus.Created, 'Successful')
 
 
 
@@ -70,13 +76,30 @@ app.put('/stock', async function(req:Request, res:Response) {
 
 app.get('/product', async function(req:Request, res:Response) {
     
+    const httpRes = new HttpResponse(res)
+    const {status, error, success} = await new ManagerProduct(productRepository).getProduct(req.body.id)
+
+    if(status === defaultReturnStatus.fail){
+        return httpRes.execute(httpResponseStatus['Bad Request'], error?.message ?? 'error')
+    }
+
+    return httpRes.execute(httpResponseStatus.Ok, 'Successful', success?.data)
+    
 })
 
 
 
 
 app.get('/products/:param', async function(req:Request, res:Response) {
-    
+     
+    const httpRes = new HttpResponse(res)
+    const {status, error, success} = await new ManagerProduct(productRepository).searchProducts(req.params.param)
+
+    if(status === defaultReturnStatus.fail){
+        return httpRes.execute(httpResponseStatus['Bad Request'], error?.message ?? 'error')
+    }
+
+    return httpRes.execute(httpResponseStatus.Ok, 'Successful', success?.data)
 });
 
 

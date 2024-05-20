@@ -1,5 +1,5 @@
 import ProductVariant from "../../domain/entities/Variants";
-import Product from "../../domain/entities/products";
+import Product from "../../domain/entities/Products";
 import { CreateProductType } from "../../domain/types/product";
 import ProductValidation from "../../domain/validation/productValidation";
 import { Result } from "../../infra/events/errors/defaultError";

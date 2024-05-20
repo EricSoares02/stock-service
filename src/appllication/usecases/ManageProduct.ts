@@ -1,7 +1,58 @@
 
+import Product from '../../domain/entities/Products';
+import { ReturnGetProductType } from '../../domain/types/product';
+import { IdSchema } from '../../domain/validation/schemas/DefaultId';
+import { categorySchema, descriptionSchema, nameSchema, subCategorySchema } from '../../domain/validation/schemas/Product';
+import ValidationData from '../../domain/validation/validation';
+import { Result } from '../../infra/events/errors/defaultError';
 import ProductRepository from './../../infra/database/productRepository';
 
 
+/*
+
+price: async (data: any) => {
+              
+                if(!await new ValidationData().execute(data.id, IdSchema) || !await new ValidationData().execute(data.price, )){
+                    return new Result<Error, string>(new Error(), "", "Invalid Data").fail();
+                }
+
+                const product = await this.ProductRepository.get(data.id);
+
+                if (product?.description) {
+
+                    product.description = data.description
+                    await this.ProductRepository.update(product)
+                    return new Result<Error, string>(new Error(), "").success();  
+                }
+
+                return new Result<Error, string>(new Error, '', 'This product dont exist').fail()
+            },
+      
+            priceCurrency: async (data: any) => {
+              
+                if(!await new ValidationData().execute(data.id, IdSchema) || !await new ValidationData().execute(data.description, )){
+                    return new Result<Error, string>(new Error(), "", "Invalid Data").fail();
+                }
+
+                const product = await this.ProductRepository.get(data.id);
+
+                if (product?.description) {
+
+                    product.description = data.description
+                    await this.ProductRepository.update(product)
+                    return new Result<Error, string>(new Error(), "").success();  
+                }
+
+                return new Result<Error, string>(new Error, '', 'This product dont exist').fail()
+            },
+**/
+
+
+export type OperetionsType = 
+|"name"
+|"description"
+|"category"
+|"subcategory"
 
 export class ManagerProduct{
 
@@ -11,65 +62,144 @@ export class ManagerProduct{
     }
 
 
-    updateCamp(data: any, uptype: string){
+    updateCamp(data: any, uptype: OperetionsType){
 
-        
-        //VALIDANDO OS DADOS RECEBIDOS
-        if(!await new ProductValidation().execute(data, ProductSchema)){
-            return new Result<Error, Product>(new Error(), data, "Validation Error, Wrong Data!").fail();
-        }
+        const operations = {
+            name: async (data: any) => {
 
+                if(!await new ValidationData().execute(data.id, IdSchema) || !await new ValidationData().execute(data.name, nameSchema)){
+                    return new Result<Error, string>(new Error(), "", "Invalid Data").fail();
+                }
 
-        //CRIO O PRODUTO
-        const product = Product.create("", data.name, data.description, data.category, data.subCategory, data.UPC, data.variants, data.createdAt)
-         
-        
+                const product = await this.ProductRepository.get(data.id);
 
-        //INSERINDO OS DADOS NO BANCO DE DADOS PELO REPOSITÓRIO
-        const productCreated = await this.ProductRepository.save(product)
+                if (product?.name) {
+
+                    product.name = data.name
+                    await this.ProductRepository.update(product)
+                    return new Result<Error, string>(new Error(), "").success();  
+                }
+
+                return new Result<Error, string>(new Error, '', 'This product dont exist').fail()
+            },
       
 
+            description: async (data: any) => {
+                if(!await new ValidationData().execute(data.id, IdSchema) || !await new ValidationData().execute(data.description, descriptionSchema)){
+                    return new Result<Error, string>(new Error(), "", "Invalid Data").fail();
+                }
 
-        //SE OS DADOS GERAIS FORAM INSERIDOS, INSERIMOS AS VARIANTES DO PRODUTO NO DB
-        if (productCreated.id) {
-            const variants: ProductVariant[] = []
-            
-            for (let index = 0; index < data.variants.length; index++) {
-                variants.push(
-                    ProductVariant.create(
-                    data.variants[index].id, 
-                    productCreated.id,
-                    data.variants[index].isActive,
-                    data.variants[index].pictures,
-                    data.variants[index].stock,
-                    data.variants[index].priceCurrency,
-                    data.variants[index].SKU,
-                    data.variants[index].priceInCent,
-                    data.variants[index].option,
-                    data.variants[index].techDetails,
-                    data.variants[index].onSale,
-                    data.variants[index].createdAt
-                    )
-                )            
-            }      
-            
-            new AddVariant(new VariantRepository()).executeMany(variants); 
+                const product = await this.ProductRepository.get(data.id);
+
+                if (product?.description) {
+
+                    product.description = data.description
+                    await this.ProductRepository.update(product)
+                    return new Result<Error, string>(new Error(), "").success();  
+                }
+
+                return new Result<Error, string>(new Error, '', 'This product dont exist').fail()
+            },
+      
+
+            category: async (data: any) => {
+                
+                if(!await new ValidationData().execute(data.id, IdSchema) || !await new ValidationData().execute(data.category, categorySchema)){
+                    return new Result<Error, string>(new Error(), "", "Invalid Data").fail();
+                }
+
+                const product = await this.ProductRepository.get(data.id);
+
+                if (product?.category) {
+
+                    product.category = data.category
+                    await this.ProductRepository.update(product)
+                    return new Result<Error, string>(new Error(), "").success();  
+                }
+
+                return new Result<Error, string>(new Error, '', 'This product dont exist').fail()
+            },
+
+
+            subcategory: async (data: any) => {
+               
+                if(!await new ValidationData().execute(data.id, IdSchema) || !await new ValidationData().execute(data.subCategory, subCategorySchema)){
+                    return new Result<Error, string>(new Error(), "", "Invalid Data").fail();
+                }
+
+                const product = await this.ProductRepository.get(data.id);
+
+                if (product?.subCategory) {
+
+                    product.subCategory = data.subCategory
+                    await this.ProductRepository.update(product)
+                    return new Result<Error, string>(new Error(), "").success();  
+                }
+
+                return new Result<Error, string>(new Error, '', 'This product dont exist').fail()
+            },
+          };
+      
+
+          function updateProductData(data: any, operation: OperetionsType) {
+            return operations[operation](data) ?? new Result<Error, string>(new Error(), "", 'Cannot Change this Camp').fail();
+          }
+      
+
+          return updateProductData(data, uptype);
+
+    }
+
+
+    async getProduct(id: string){
+
+        //VALIDANDO OS DADOS RECEBIDOS
+        if(!await new ValidationData().execute(id, IdSchema)){
+            return new Result<Error, string>(new Error(), id, "Validation Error, Wrong Data!").fail();
+        }
+   
+
+        //FAZENDO ALTERAÇÃO
+        const product = await this.ProductRepository.get(id)
+      
+        if (!product) {
+            return new Result<Error, null>(new Error(), product, "Validation Error, Wrong Data!").fail()
         }
 
-
-        return new Result<Error, CreateProductType>(new Error(), productCreated).success();
-
-
-
+        return new Result<Error, ReturnGetProductType>(new Error(), product, "Validation Error, Wrong Data!").success()
 
 
     }
 
 
+
+    async searchProducts(params: string){
+
+         //VALIDANDO OS DADOS RECEBIDOS
+         if(typeof params !== 'string'){
+            return new Result<Error, string>(new Error(), params, "Validation Error, Wrong Data!").fail();
+        }
+   
+
+        //Search
+        const product = await this.ProductRepository.search(params)
+      
+        if (!product) {
+            return new Result<Error, null>(new Error(), product, "Validation Error, Wrong Data!").fail()
+        }
+
+        return new Result<Error, {
+            id: string;
+            name: string;
+            description: string;
+            category: string;
+            subCategory: string;
+            UPC: number;
+            createdAt: Date;
+        }[]>(new Error(), product, "Validation Error, Wrong Data!").success()
+
+
+    }
     
-    
-
-
-
 
 }
