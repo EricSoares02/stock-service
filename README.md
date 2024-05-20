@@ -14,7 +14,7 @@
 ![javascript][JAVASCRIPT__BADGE]
 ![mongo][MONGO_BADGE]
 ![rabbitmq][RABBITMQ_BADGE]
-![zod][ZOD]
+![zod][ZOD_BADGE]
 
 <p align="center">
  <a href="#started">Getting Started</a> • 
