@@ -24,7 +24,10 @@
 </p>
 
 <p align="center">
-  <b>(Português) Este Projeto é um microservice responsável pelo gerenciamento do estoque de produtos. Por meio da aplicação, produtos podem ser cadastrado, mantidos e gerenciados. (English) This Project is a microservice responsible for managing product inventory. Through the application, products can be registered, maintained and managed.</b>
+  <b>(Português) Este Projeto é um microservice responsável pelo gerenciamento do estoque de produtos. Por meio da aplicação, produtos podem ser cadastrado, mantidos e gerenciados.</b>
+</p>
+<p align="center">
+  <b>(English) This Project is a microservice responsible for managing product inventory. Through the application, products can be registered, maintained and managed.</b>
 </p>
 
 <h2 id="started">🚀 Getting started</h2>
@@ -33,17 +36,17 @@ Here you describe how to run your project locally
 
 <h3>Prerequisites</h3>
 
-Here you list all prerequisites necessary for running your project. For example:
+Here are the prerequisites to run the application:
 
-- [NodeJS](https://github.com/)
-- [Git 2](https://github.com)
+- [NodeJS](https://nodejs.org)
+
 
 <h3>Cloning</h3>
 
-How to clone your project
+How to clone the project
 
 ```bash
-git clone your-project-url-in-github
+git clone https://github.com/EricSoares02/stock-service
 ```
 
 <h3> Environment Variables</h2>
