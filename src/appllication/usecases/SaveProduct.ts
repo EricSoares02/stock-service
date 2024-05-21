@@ -19,7 +19,7 @@ export default class SaveProduct{
     async execute(data: Product){
 
         
-        //VALIDANDO OS DADOS RECEBIDOS
+        //VALIDANDO OS TIPOD DE DADOS RECEBIDOS
         if(!await new ProductValidation().execute(data, ProductSchema)){
             return new Result<Error, Product>(new Error(), data, "Validation Error, Wrong Data!").fail();
         }
@@ -60,7 +60,6 @@ export default class SaveProduct{
             
             new AddVariant(new VariantRepository()).executeMany(variants); 
         }
-
 
         return new Result<Error, CreateProductType>(new Error(), productCreated).success();
 

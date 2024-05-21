@@ -3,8 +3,8 @@ import client, { Channel, Connection } from "amqplib";
 
 export class SetupRabbitMQ{
 
-    private connection: Connection;
-    private channel: Channel;
+    private connection: any;
+    private channel: any;
     private QUEUE: string = 'product'
 
     constructor(){
