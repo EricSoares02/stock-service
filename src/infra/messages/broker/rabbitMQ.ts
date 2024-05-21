@@ -31,4 +31,10 @@ export class SetupRabbitMQ{
         this.channel = await this.connection.createChannel()
     }
     
+
+
+    public sendMessage(payload: any): void{
+        const message = JSON.stringify(payload)
+        this.channel.sendToQueue(this.QUEUE, Buffer.from(message))
+    }
     }
