@@ -7,6 +7,7 @@ import { ProductSchema } from './../../domain/validation/schemas/Product';
 import ProductRepository from './../../infra/database/productRepository';
 import VariantRepository from './../../infra/database/variantRepository';
 import { AddVariant } from "./AddVariant";
+import { SetupRabbitMQ } from "../../infra/messages/broker/rabbitMQ";
 
 
 
@@ -59,11 +60,15 @@ export default class SaveProduct{
             }      
             
             new AddVariant(new VariantRepository()).executeMany(variants); 
+
+
+            new SetupRabbitMQ().sendMessage(data)
+    
+            return new Result<Error, CreateProductType>(new Error(), productCreated).success();
         }
 
-        return new Result<Error, CreateProductType>(new Error(), productCreated).success();
-
-
+        return new Result<Error, string>(new Error(), '', "Internal Server Error").fail();
+        
     }
 
 }
