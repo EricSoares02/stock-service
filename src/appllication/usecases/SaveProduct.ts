@@ -7,7 +7,6 @@ import { ProductSchema } from './../../domain/validation/schemas/Product';
 import ProductRepository from './../../infra/database/productRepository';
 import VariantRepository from './../../infra/database/variantRepository';
 import { AddVariant } from "./AddVariant";
-import { SetupRabbitMQ } from "../../infra/messages/broker/rabbitMQ";
 
 
 
@@ -19,7 +18,7 @@ export default class SaveProduct{
     
     async execute(data: Product){
 
-        
+    
         //VALIDANDO OS TIPOD DE DADOS RECEBIDOS
         if(!await new ProductValidation().execute(data, ProductSchema)){
             return new Result<Error, Product>(new Error(), data, "Validation Error, Wrong Data!").fail();
@@ -60,9 +59,6 @@ export default class SaveProduct{
             }      
             
             new AddVariant(new VariantRepository()).executeMany(variants); 
-
-
-            new SetupRabbitMQ().sendMessage(data)
     
             return new Result<Error, CreateProductType>(new Error(), productCreated).success();
         }

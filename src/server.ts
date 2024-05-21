@@ -1,30 +1,24 @@
-import express, {Application, Router,} from 'express';
-import cors from 'cors'
+import express from "express";
+import cors from 'cors';
+
 
 export class SetupServer{
 
 
-    private app = express()
-
-    constructor(private Port: number){
-        this.init()
+    constructor(private Port: number, private routes: any, private app = express()){
+        this.init();
     }
 
 
-    private async init(): Promise<void>{
-        this.app.use(express.json());  
-        this.app.use(cors) 
-        this.app.listen(this.Port);  
-        
-    } 
-
-
-    getApp(): Application{
-        return this.app
+    private init(){
+        this.app.use(express.json());
+        this.app.use(this.routes);
+        this.app.use(cors());
+       this.start();
     }
 
+    
+    private start(){
+        return this.app.listen(this.Port, ()=>console.info(`Server Running on Port: ${this.Port}`))
+    }
 }
-
-
-
-
