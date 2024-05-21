@@ -10,4 +10,4 @@ router.put("/product", new ProductController().update);
 
 router.get("/product:id", new ProductController().get);
 
-router.get("/search/:params");
+router.get("/search/:params", new ProductController().search);
